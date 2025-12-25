@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#2563eb">
+    <title>AU Radar</title>
+    
+    <!-- PWA Settings -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="AU Radar">
+
+    <!-- Embedded Manifest and Icon (Base64) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjI1NiIgZmlsbD0iIzI1NjNlYiIvPjxwYXRoIGQ9Ik0zNjkuMSA4Ni44Yy0xOC02LjQtMzcuNy05LjctNTguMi05LjdjLTkyLjYgMC0xNjcuNyA3NS4xLTE2Ny43IDE2Ny43YzAgMTYuMiAyLjEgMzEuOSA2LjEgNDcuMUwxMzQuNiAzMjZjLTIzLjQtMjguMS0zNy41LTY0LjItMzcuNS0xMDMuNmMwLTg4LjQgNzEuNi0xNjAgMTYwLTE2MGMzOC44IDAgNzQuNCAxMy45IDEwMi4xIDM3LjFMMzY5LjEgODYuOHptLTEwLjYgMjcuMmMtNDQuNi0yNy43LTk5LjgtMjIuMS0xMzkuNCAxNC4ybDc1LjIgNzUuMmMxMi44LTEuNyAyNi4xLTEuNSA0MC4yIDMuN2MwIDAgMTM1LjUgNDkuOSAxNDguOSA1NC45QzQ4My4zIDI4Ny4xIDQ2OS4xIDE3OS45IDM1OC41IDExNHptLTI4LjggMTQxbC03NS4yLTc1LjJjLTkuNCA4LjYtMTcgMTkuNy0yMi4xIDMxLjlMMzAzLjkgMzAzLjljMTIuMi01LjIgMjMuMy0xMi44IDMxLjktMjIuMXMtNS4zLTI1LjMtNi4xLTI2Ljh6bS05My4xIDcyLjZsLTY4LjEtNjguMWMtNiA1OC42IDIzLjYgMTE1LjEgODAuMSAxNDQuOGwzMS4xLTMxLjFjLTIzLjktMTEuOC00MC42LTI4LjUtNTIuNC01Mi40em0xMzMuNCAxNy42bC0zMS4xIDMxLjFjNTYuMiAyMS44IDEyMC4zLTMuOCAxNTEuMy01Ni43bC03LjMtMi43Yy0yNC43IDM3LjktNjguNiA1MC0xMTIuOSAyOC4zeiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48Y2lyY2xlIGN4PSIyNTYiIGN5PSIyNTYiIHI9IjI1NiIgZmlsbD0iIzI1NjNlYiIvPjxwYXRoIGQ9Ik0zNjkuMSA4Ni44Yy0xOC02LjQtMzcuNy05LjctNTguMi05LjdjLTkyLjYgMC0xNjcuNyA3NS4xLTE2Ny43IDE2Ny43YzAgMTYuMiAyLjEgMzEuOSA2LjEgNDcuMUwxMzQuNiAzMjZjLTIzLjQtMjguMS0zNy41LTY0LjItMzcuNS0xMDMuNmMwLTg4LjQgNzEuNi0xNjAgMTYwLTE2MGMzOC44IDAgNzQuNCAxMy45IDEwMi4xIDM3LjFMMzY5LjEgODYuOHptLTEwLjYgMjcuMmMtNDQuNi0yNy43LTk5LjgtMjIuMS0xMzkuNCAxNC4ybDc1LjIgNzUuMmMxMi44LTEuNyAyNi4xLTEuNSA0MC4yIDMuN2MwIDAgMTM1LjUgNDkuOSAxNDguOSA1NC45QzQ4My4zIDI4Ny4xIDQ2OS4xIDE3OS45IDM1OC41IDExNHptLTI4LjggMTQxbC03NS4yLTc1LjJjLTkuNCA4LjYtMTcgMTkuNy0yMi4xIDMxLjlMMzAzLjkgMzAzLjljMTIuMi01LjIgMjMuMy0xMi44IDMxLktMjIuMXMtNS4zLTI1LjMtNi4xLTI2Ljh6bS05My4xIDcyLjZsLTY4LjEtNjguMWMtNiA1OC42IDIzLjYgMTE1LjEgODAuMSAxNDQuOGwzMS4xLTMxLjFjLTIzLjktMTEuOC00MC42LTI4LjUtNTIuNC01Mi40em0xMzMuNCAxNy42bC0zMS4xIDMxLjFjNTYuMiAyMS44IDEyMC4zLTMuOCAxNTEuMy01Ni43bC03LjMtMi43Yy0yNC43IDM3LjktNjguNiA1MC0xMTIuOSAyOC4zeiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=">
+    
+    <!-- Inline Manifest for Android PWA -->
+    <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiQVUgUmFkYXIiLCJzaG9ydF9uYW1lIjoiQVUgUmFkYXIiLCJzdGFydF91cmwiOiIuIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiI2ZmZmZmZiIsInRoZW1lX2NvbG9yIjoiIzI1NjNlYiIsImljb25zIjpbeyJzcmMiOiJkYXRhOmltYWdlL3N2Zyt4bWw7YmFzZTY0LFBITjJaeUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTVMTXk1dmNtY3ZNakF3TUM5emRtY2lJSFpwWlhkQmMzZzlJakF3SURBeE1qQXdNVElpPjxwYXRoIGZpbGw9IiMyNTYzZWIiIGQ9Ik0wIDBoNTEydjUxMkgweiIvPjxwYXRoIGQ9Ik0zNjkuMSA4Ni44Yy0xOC02LjQtMzcuNy05LjctNTguMi05LjdjLTkyLjYgMC0xNjcuNyA3NS4xLTE2Ny43IDE2Ny43YzAgMTYuMiAyLjEgMzEuOSA2LjEgNDcuMUwxMzQuNiAzMjZjLTIzLjQtMjguMS0zNy41LTY0LjItMzcuNS0xMDMuNmMwLTg4LjQgNzEuNi0xNjAgMTYwLTE2MGMzOC44IDAgNzQuNCAxMy45IDEwMi4xIDM3LjFMMzY5LjEgODYuOHptLTEwLjYgMjcuMmMtNDQuNi0yNy43LTk5LjgtMjIuMS0xMzkuNCAxNC4ybDc1LjIgNzUuMmMxMi44LTEuNyAyNi4xLTEuNSA0MC4yIDMuN2MwIDAgMTM1LjUgNDkuOSAxNDguOSA1NC45QzQ4My4zIDI4Ny4xIDQ2OS4xIDE3OS45IDM1OC41IDExNHptLTI4LjggMTQxbC03NS4yLTc1LjJjLTkuNCA4LjYtMTcgMTkuNy0yMi4xIDMxLjlMMzAzLjkgMzAzLjljMTIuMi01LjIgMjMuMy0xMi44IDMxLktMjIuMXMtNS4zLTI1LjMtNi4xLTI2Ljh6bS05My4xIDcyLjZsLTY4LjEtNjguMWMtNiA1OC42IDIzLjYgMTE1LjEgODAuMSAxNDQuOGwzMS4xLTMxLjFjLTIzLjktMTEuOC00MC42LTI4LjUtNTIuNC01Mi40em0xMzMuNCAxNy42bC0zMS4xIDMxLjFjNTYuMiAyMS44IDEyMC4zLTMuOCAxNTEuMy01Ni43bC03LjMtMi43Yy0yNC43IDM3LjktNjguNiA1MC0xMTIuOSAyOC4zeiIgZmlsbD0id2hpdGUiLz48L3N2Zz4iLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* PWA Safe Area for iPhone X+ */
+        body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+
+        /* Radar stack container */
+        .radar-container {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            width: 100%;
+            max-width: 512px;
+            background-color: #000;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            -webkit-user-drag: none;
+            user-select: none;
+            touch-action: none;
+            cursor: grab;
+        }
+        .radar-container:active { cursor: grabbing; }
+
+        .radar-zoom-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            transform-origin: 0 0;
+            will-change: transform;
+        }
+
+        .radar-layer {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; user-select: none;
+            transition: opacity 0.2s;
+        }
+
+        .layer-background { z-index: 10; } 
+        .layer-catchments { z-index: 11; }
+        .layer-topography { z-index: 12; }
+        .layer-rain       { z-index: 20; opacity: 0; transition: opacity 0s; } 
+        .layer-rain.active { opacity: 1; }
+        .layer-locations  { z-index: 30; } 
+        .layer-ui         { z-index: 40; pointer-events: none; }
+        .interactive-ui   { pointer-events: auto; }
+        .layer-hidden { opacity: 0 !important; }
+
+        /* User Location Marker */
+        .user-marker {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background-color: #3b82f6; /* Blue */
+            border: 2px solid white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 35; /* Above rain/locations */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            pointer-events: none;
+            display: none; /* Hidden by default */
+        }
+        
+        .user-marker::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 100%; height: 100%;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.6;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+        }
+
+        input[type=range] { -webkit-appearance: none; background: transparent; }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; height: 24px; width: 24px;
+            border-radius: 50%; background: #3b82f6; margin-top: -10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 4px; background: #e5e7eb; border-radius: 2px;
+        }
+        input[type=range]:focus { outline: none; }
+
+        .legend-gradient {
+            background: linear-gradient(to right, 
+                #f9fafb 0%, #93c5fd 20%, #2563eb 40%, #facc15 60%, #dc2626 80%, #000000 100%
+            );
+        }
+        
+        .zoom-reset {
+            position: absolute; top: 10px; right: 10px; z-index: 50;
+            background: rgba(0,0,0,0.6); color: white;
+            padding: 4px 8px; border-radius: 4px; font-size: 12px;
+            cursor: pointer; display: none; backdrop-filter: blur(2px);
+        }
+
+        /* Segmented Control Tab Styles */
+        .tab-btn {
+            @apply flex-1 py-2.5 text-sm sm:text-base font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 flex items-center justify-center;
+        }
+        .tab-btn.active {
+            @apply bg-white text-blue-600 shadow-sm border border-gray-100;
+        }
+        .tab-btn.inactive {
+            @apply text-gray-500 hover:text-gray-700 hover:bg-gray-200/50;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center py-2 px-2 sm:py-8 sm:px-4 font-sans text-gray-800">
+
+    <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg relative overflow-hidden">
+        
+        <!-- Header -->
+        <div class="bg-white p-4 sm:p-6 pb-2">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-bold text-gray-900 flex items-center">
+                        <i class="fas fa-satellite-dish text-blue-600 mr-2"></i>AU Weather
+                    </h1>
+                    <p class="text-xs sm:text-sm text-gray-500 mt-1">Live data via BOM</p>
+                </div>
+                <button id="geoBtn" class="text-blue-600 hover:text-blue-800 text-sm flex items-center px-3 py-1 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors" title="Update my location">
+                    <i class="fas fa-location-arrow mr-2"></i> Locate Me
+                </button>
+            </div>
+
+            <!-- Location Select (Common) -->
+            <div class="mb-4">
+                <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Location</label>
+                <select id="locationSelect" class="w-full border-gray-300 border rounded-lg p-3 sm:p-2 text-base sm:text-sm focus:ring-blue-500 focus:border-blue-500 shadow-sm bg-gray-50 outline-none">
+                    <!-- Populated by JS -->
+                </select>
+            </div>
+
+            <!-- Tabs (Segmented Control) -->
+            <div class="flex p-1 space-x-1 bg-gray-100 rounded-xl mb-2">
+                <button id="tabBtnRadar" class="tab-btn active">
+                    <i class="fas fa-radar mr-2"></i>Radar
+                </button>
+                <button id="tabBtnWeather" class="tab-btn inactive">
+                    <i class="fas fa-thermometer-half mr-2"></i>Current
+                </button>
+                <button id="tabBtnForecast" class="tab-btn inactive">
+                    <i class="fas fa-calendar-alt mr-2"></i>7-Day
+                </button>
+            </div>
+        </div>
+
+        <!-- VIEW: RADAR -->
+        <div id="viewRadar" class="p-4 sm:p-6 pt-2">
+            <div class="mb-4">
+                <label class="block text-xs sm:text-sm font-medium text-gray-700 mb-1">Radar Range</label>
+                <select id="rangeSelect" class="w-full border-gray-300 border rounded-lg p-3 sm:p-2 text-base sm:text-sm focus:ring-blue-500 focus:border-blue-500 shadow-sm bg-gray-50 outline-none">
+                    <option value="64">64 km (Detailed)</option>
+                    <option value="128" selected>128 km (Standard)</option>
+                    <option value="256">256 km (Wide)</option>
+                    <option value="512">512 km (Composite)</option>
+                </select>
+            </div>
+
+            <div class="flex flex-wrap gap-2 mb-4 text-xs sm:text-sm">
+                <label class="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-md border cursor-pointer select-none">
+                    <input type="checkbox" id="toggleLocations" checked class="rounded text-blue-600 focus:ring-blue-500">
+                    <span>Locations</span>
+                </label>
+                <label class="flex items-center space-x-2 bg-gray-50 px-3 py-2 rounded-md border cursor-pointer select-none">
+                    <input type="checkbox" id="toggleTopo" checked class="rounded text-blue-600 focus:ring-blue-500">
+                    <span>Terrain</span>
+                </label>
+                <div class="flex-grow text-right text-gray-400 text-xs self-center hidden sm:block">
+                    <i class="fas fa-search-plus mr-1"></i> Pinch/Scroll to Zoom
+                </div>
+            </div>
+
+            <div class="flex justify-center mb-4 sm:mb-6 relative">
+                <div id="radarContainer" class="radar-container bg-black">
+                    <div id="radarZoomLayer" class="radar-zoom-layer">
+                        <img id="imgBackground" class="radar-layer layer-background" alt="Background">
+                        <img id="imgCatchments" class="radar-layer layer-catchments" alt="Catchments">
+                        <img id="imgTopography" class="radar-layer layer-topography" alt="Topography">
+                        <img id="imgLocations" class="radar-layer layer-locations" alt="Locations">
+                        <div id="rainLayerContainer"></div>
+                        <div id="userMarker" class="user-marker"></div>
+                    </div>
+
+                    <button id="resetZoomBtn" class="zoom-reset interactive-ui"><i class="fas fa-compress"></i> Reset</button>
+
+                    <div id="loadingOverlay" class="absolute inset-0 z-50 flex flex-col items-center justify-center bg-gray-900 bg-opacity-80 text-white backdrop-blur-sm pointer-events-none">
+                        <div class="w-48 bg-gray-700 rounded-full h-2.5 mb-4">
+                            <div id="loadingBar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <span id="loadingText" class="text-sm font-semibold tracking-wide">Connecting...</span>
+                    </div>
+
+                    <div class="layer-ui absolute bottom-3 right-3 bg-black/70 backdrop-blur-sm p-2 rounded-lg border border-white/10">
+                        <div class="text-[10px] text-gray-300 font-bold mb-1 text-center uppercase tracking-wider">Intensity</div>
+                        <div class="w-32 h-2 legend-gradient rounded-full mb-1"></div>
+                        <div class="flex justify-between w-32 text-[9px] text-gray-300 font-medium">
+                            <span>Light</span>
+                            <span>Heavy</span>
+                        </div>
+                    </div>
+
+                    <div id="playOverlayIcon" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300 z-50">
+                        <div class="bg-black/50 rounded-full p-6 text-white backdrop-blur">
+                            <i class="fas fa-play text-4xl ml-2"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between bg-gray-50 p-3 sm:p-4 rounded-lg border gap-3 sm:gap-0">
+                <div class="flex items-center w-full sm:w-auto space-x-4">
+                    <button id="playBtn" class="bg-blue-600 active:bg-blue-800 hover:bg-blue-700 text-white w-12 h-12 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-colors shadow-sm shrink-0">
+                        <i class="fas fa-pause text-lg sm:text-base"></i>
+                    </button>
+                    <div class="flex space-x-1 sm:hidden">
+                        <button id="stepBackBtn" class="bg-white border border-gray-300 text-gray-600 w-10 h-10 rounded-full"><i class="fas fa-step-backward"></i></button>
+                        <button id="stepFwdBtn" class="bg-white border border-gray-300 text-gray-600 w-10 h-10 rounded-full"><i class="fas fa-step-forward"></i></button>
+                    </div>
+                    <div class="text-sm flex flex-col justify-center pl-2">
+                        <div class="font-bold text-gray-800 text-base sm:text-sm" id="currentFrameTime">--:--</div>
+                        <div class="text-gray-500 text-xs" id="frameCounter">0/0 frames</div>
+                    </div>
+                </div>
+                <div class="flex items-center w-full sm:w-auto bg-white sm:bg-transparent p-2 sm:p-0 rounded-lg border sm:border-0 border-gray-200">
+                    <span class="text-xs font-bold text-gray-400 mr-3 px-2">SPEED</span>
+                    <input type="range" id="speedRange" min="100" max="1000" step="100" class="w-full sm:w-32 h-8 cursor-pointer align-middle">
+                </div>
+            </div>
+            <div id="statusMessage" class="mt-4 text-xs text-center text-gray-500 min-h-[1rem]"></div>
+        </div>
+
+        <!-- VIEW: CURRENT WEATHER -->
+        <div id="viewWeather" class="p-4 sm:p-6 hidden bg-gray-50/50 min-h-[400px]">
+            <div class="text-center mb-8 mt-4">
+                <div class="text-6xl font-bold text-gray-800 tracking-tighter mb-2" id="weatherTemp">--°</div>
+                <div class="text-gray-500 text-lg">Current Temperature</div>
+                <div class="text-xs text-gray-400 mt-1">Data from Open-Meteo (ACCESS Model)</div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto mb-8">
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center">
+                    <i class="fas fa-temperature-high text-orange-500 mb-2 text-xl"></i>
+                    <span class="text-gray-500 text-xs uppercase font-bold tracking-wide">Feels Like</span>
+                    <span class="text-xl font-semibold text-gray-800" id="weatherFeels">--</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center">
+                    <i class="fas fa-wind text-blue-500 mb-2 text-xl"></i>
+                    <span class="text-gray-500 text-xs uppercase font-bold tracking-wide">Wind</span>
+                    <span class="text-xl font-semibold text-gray-800" id="weatherWind">--</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center">
+                    <i class="fas fa-tint text-blue-400 mb-2 text-xl"></i>
+                    <span class="text-gray-500 text-xs uppercase font-bold tracking-wide">Humidity</span>
+                    <span class="text-xl font-semibold text-gray-800" id="weatherHumid">--</span>
+                </div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center">
+                    <i class="fas fa-compass text-gray-500 mb-2 text-xl"></i>
+                    <span class="text-gray-500 text-xs uppercase font-bold tracking-wide">Direction</span>
+                    <span class="text-xl font-semibold text-gray-800" id="weatherDir">--</span>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a id="bomLink" href="http://www.bom.gov.au/" target="_blank" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors shadow-md">
+                    View full forecast on BOM <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- VIEW: FORECAST -->
+        <div id="viewForecast" class="p-4 sm:p-6 hidden bg-gray-50/50 min-h-[400px]">
+            <div id="forecastContainer" class="space-y-3 max-w-lg mx-auto">
+                <div class="text-center text-gray-500 py-10"><i class="fas fa-spinner fa-spin text-2xl"></i> Loading forecast...</div>
+            </div>
+            <div class="text-center mt-6">
+                <p class="text-xs text-gray-400">Forecast data via Open-Meteo (ACCESS)</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const RADAR_DATA = {
+            "Sydney (Terrey Hills)":    { lat: -33.70, lon: 151.21, state: 'nsw', ids: { "64": "IDR714", "128": "IDR713", "256": "IDR712", "512": "IDR711" }},
+            "Melbourne":                { lat: -37.86, lon: 144.75, state: 'vic', ids: { "64": "IDR024", "128": "IDR023", "256": "IDR022", "512": "IDR021" }},
+            "Brisbane (Mt Stapylton)":  { lat: -27.72, lon: 153.24, state: 'qld', ids: { "64": "IDR664", "128": "IDR663", "256": "IDR662", "512": "IDR661" }},
+            "Perth (Serpentine)":       { lat: -32.39, lon: 115.97, state: 'wa', ids: { "64": "IDR704", "128": "IDR703", "256": "IDR702", "512": "IDR701" }},
+            "Adelaide (Buckland Park)": { lat: -34.62, lon: 138.47, state: 'sa', ids: { "64": "IDR644", "128": "IDR643", "256": "IDR642", "512": "IDR641" }},
+            "Canberra (Captains Flat)": { lat: -35.59, lon: 149.51, state: 'act', ids: { "64": "IDR404", "128": "IDR403", "256": "IDR402", "512": "IDR401" }},
+            "Hobart (Mt Koonya)":       { lat: -43.11, lon: 147.80, state: 'tas', ids: { "64": "IDR374", "128": "IDR373", "256": "IDR372", "512": "IDR371" }},
+            "Darwin (Berrimah)":        { lat: -12.46, lon: 130.93, state: 'nt', ids: { "64": "IDR634", "128": "IDR633", "256": "IDR632", "512": "IDR631" }}
+        };
+
+        const BASE_URL = "https://www.bom.gov.au/radar/";
+        const STATIC_BASE_URL = "https://www.bom.gov.au/products/radar_transparencies/";
+        
+        let currentFrames = []; 
+        let currentFrameIndex = 0;
+        let isPlaying = true;
+        let animationInterval = null;
+        let autoRefreshTimer = null;
+        let userLocation = null;
+        let activeTab = 'radar';
+        
+        const savedSpeed = localStorage.getItem('radarSpeed');
+        let animationSpeed = savedSpeed ? parseInt(savedSpeed) : 400; 
+
+        let zoomState = { scale: 1, x: 0, y: 0 };
+        const MAX_ZOOM = 4;
+        const MIN_ZOOM = 1;
+
+        const els = {
+            locSelect: document.getElementById('locationSelect'),
+            rangeSelect: document.getElementById('rangeSelect'),
+            rainContainer: document.getElementById('rainLayerContainer'),
+            radarContainer: document.getElementById('radarContainer'),
+            zoomLayer: document.getElementById('radarZoomLayer'),
+            userMarker: document.getElementById('userMarker'),
+            resetZoomBtn: document.getElementById('resetZoomBtn'),
+            loading: document.getElementById('loadingOverlay'),
+            loadingText: document.getElementById('loadingText'),
+            loadingBar: document.getElementById('loadingBar'),
+            playBtn: document.getElementById('playBtn'),
+            playIcon: document.querySelector('#playBtn i'),
+            playOverlay: document.getElementById('playOverlayIcon'),
+            stepBackBtn: document.getElementById('stepBackBtn'),
+            stepFwdBtn: document.getElementById('stepFwdBtn'),
+            timeDisplay: document.getElementById('currentFrameTime'),
+            counterDisplay: document.getElementById('frameCounter'),
+            speedInput: document.getElementById('speedRange'),
+            status: document.getElementById('statusMessage'),
+            geoBtn: document.getElementById('geoBtn'),
+            toggles: {
+                loc: document.getElementById('toggleLocations'),
+                topo: document.getElementById('toggleTopo')
+            },
+            layers: {
+                bg: document.getElementById('imgBackground'),
+                catchments: document.getElementById('imgCatchments'),
+                topo: document.getElementById('imgTopography'),
+                loc: document.getElementById('imgLocations')
+            },
+            tabs: {
+                radar: document.getElementById('tabBtnRadar'),
+                weather: document.getElementById('tabBtnWeather'),
+                forecast: document.getElementById('tabBtnForecast')
+            },
+            views: {
+                radar: document.getElementById('viewRadar'),
+                weather: document.getElementById('viewWeather'),
+                forecast: document.getElementById('viewForecast')
+            },
+            forecastContainer: document.getElementById('forecastContainer')
+        };
+
+        function init() {
+            Object.keys(RADAR_DATA).forEach(city => {
+                const opt = document.createElement('option');
+                opt.value = city;
+                opt.textContent = city;
+                els.locSelect.appendChild(opt);
+            });
+
+            // Restore user GPS if available
+            const savedGPS = localStorage.getItem('userGPS');
+            if (savedGPS) {
+                try {
+                    userLocation = JSON.parse(savedGPS);
+                } catch (e) { console.error(e); }
+            }
+
+            const savedLoc = localStorage.getItem('radarLocation');
+            if (savedLoc && RADAR_DATA[savedLoc]) {
+                els.locSelect.value = savedLoc;
+            } else {
+                els.locSelect.value = "Sydney (Terrey Hills)";
+            }
+
+            els.speedInput.value = 1100 - animationSpeed;
+            updateLayerVisibility();
+            initZoomControls(); 
+
+            // Event Listeners
+            els.locSelect.addEventListener('change', () => {
+                localStorage.setItem('radarLocation', els.locSelect.value);
+                if (activeTab === 'radar') loadRadarSequence();
+                else if (activeTab === 'weather') updateWeather();
+                else updateForecast();
+            });
+            els.rangeSelect.addEventListener('change', loadRadarSequence);
+            
+            // Tab Switching
+            els.tabs.radar.addEventListener('click', () => switchTab('radar'));
+            els.tabs.weather.addEventListener('click', () => switchTab('weather'));
+            els.tabs.forecast.addEventListener('click', () => switchTab('forecast'));
+
+            els.playBtn.addEventListener('click', togglePlay);
+            els.stepBackBtn.addEventListener('click', () => stepFrame(-1));
+            els.stepFwdBtn.addEventListener('click', () => stepFrame(1));
+            
+            els.toggles.loc.addEventListener('change', updateLayerVisibility);
+            els.toggles.topo.addEventListener('change', updateLayerVisibility);
+
+            els.speedInput.addEventListener('input', (e) => {
+                animationSpeed = 1100 - e.target.value; 
+                localStorage.setItem('radarSpeed', animationSpeed);
+                if(isPlaying && currentFrames.length > 0) startAnimation();
+            });
+
+            els.geoBtn.addEventListener('click', handleGeolocation);
+            els.resetZoomBtn.addEventListener('click', resetZoom);
+
+            document.addEventListener('keydown', (e) => {
+                if(activeTab !== 'radar') return;
+                if(e.key === "ArrowLeft") stepFrame(-1);
+                if(e.key === "ArrowRight") stepFrame(1);
+                if(e.key === " ") {
+                    e.preventDefault(); 
+                    togglePlay();
+                }
+            });
+
+            if (autoRefreshTimer) clearInterval(autoRefreshTimer);
+            autoRefreshTimer = setInterval(() => {
+                if(activeTab === 'radar') loadRadarSequence();
+            }, 300000);
+
+            // Start
+            loadRadarSequence();
+        }
+
+        function switchTab(tab) {
+            activeTab = tab;
+            
+            // Reset classes
+            Object.values(els.tabs).forEach(el => el.className = 'tab-btn inactive');
+            Object.values(els.views).forEach(el => el.classList.add('hidden'));
+
+            // Set Active
+            els.tabs[tab].className = 'tab-btn active';
+            els.views[tab].classList.remove('hidden');
+
+            if(tab === 'radar') {
+                if(currentFrames.length > 0 && isPlaying) startAnimation();
+            } else {
+                stopAnimation();
+                if(tab === 'weather') updateWeather();
+                if(tab === 'forecast') updateForecast();
+            }
+        }
+
+        async function updateForecast() {
+            const city = els.locSelect.value;
+            const coords = RADAR_DATA[city];
+            if(!coords) return;
+
+            els.forecastContainer.innerHTML = '<div class="text-center text-gray-500 py-10"><i class="fas fa-spinner fa-spin text-2xl"></i> Loading...</div>';
+
+            try {
+                // Fetch Daily Data
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`;
+                const res = await fetch(url);
+                const data = await res.json();
+                
+                if(data.daily) {
+                    let html = '';
+                    const d = data.daily;
+                    
+                    for(let i=0; i<d.time.length; i++) {
+                        const date = new Date(d.time[i]);
+                        // Simple check to see if it is today
+                        const isToday = new Date().toDateString() === date.toDateString();
+                        const dayName = isToday ? 'Today' : date.toLocaleDateString('en-AU', { weekday: 'long' });
+                        const dateStr = date.toLocaleDateString('en-AU', { day: 'numeric', month: 'short' });
+                        
+                        const iconHtml = getWeatherIcon(d.weathercode[i]);
+                        
+                        html += `
+                        <div class="flex items-center justify-between bg-white p-3 rounded-lg shadow-sm border border-gray-100">
+                            <div class="w-1/3">
+                                <div class="font-semibold text-gray-800 ${isToday ? 'text-blue-600' : ''}">${dayName}</div>
+                                <div class="text-xs text-gray-400">${dateStr}</div>
+                            </div>
+                            <div class="flex-1 flex flex-col items-center">
+                                ${iconHtml}
+                                <div class="text-xs text-blue-500 font-medium mt-1">
+                                    <i class="fas fa-tint"></i> ${d.precipitation_probability_max[i]}%
+                                </div>
+                            </div>
+                            <div class="w-1/3 text-right">
+                                <span class="font-bold text-gray-800 text-lg">${Math.round(d.temperature_2m_max[i])}°</span>
+                                <span class="text-gray-400 text-sm ml-1">${Math.round(d.temperature_2m_min[i])}°</span>
+                            </div>
+                        </div>
+                        `;
+                    }
+                    els.forecastContainer.innerHTML = html;
+                }
+            } catch(e) {
+                console.error("Forecast fetch failed", e);
+                els.forecastContainer.innerHTML = '<div class="text-center text-red-500 py-4">Unable to load forecast.</div>';
+            }
+        }
+
+        function getWeatherIcon(code) {
+            // WMO Weather interpretation codes (WW)
+            // https://open-meteo.com/en/docs
+            let iconClass = 'fas fa-question';
+            let colorClass = 'text-gray-400';
+
+            if (code === 0) { iconClass = 'fas fa-sun'; colorClass = 'text-yellow-500'; }
+            else if (code >= 1 && code <= 3) { iconClass = 'fas fa-cloud-sun'; colorClass = 'text-gray-500'; }
+            else if (code >= 45 && code <= 48) { iconClass = 'fas fa-smog'; colorClass = 'text-gray-400'; }
+            else if (code >= 51 && code <= 55) { iconClass = 'fas fa-cloud-rain'; colorClass = 'text-blue-400'; }
+            else if (code >= 61 && code <= 67) { iconClass = 'fas fa-umbrella'; colorClass = 'text-blue-600'; }
+            else if (code >= 80 && code <= 82) { iconClass = 'fas fa-cloud-showers-heavy'; colorClass = 'text-blue-700'; }
+            else if (code >= 95 && code <= 99) { iconClass = 'fas fa-bolt'; colorClass = 'text-yellow-600'; }
+
+            return `<i class="${iconClass} ${colorClass} text-2xl"></i>`;
+        }
+
+        async function updateWeather() {
+            const city = els.locSelect.value;
+            const coords = RADAR_DATA[city];
+            if(!coords) return;
+
+            // Update BOM Link
+            const bomLink = document.getElementById('bomLink');
+            if(coords.state) {
+                // Approximate state page link
+                bomLink.href = `http://www.bom.gov.au/${coords.state}/`;
+            }
+
+            // Show loading placeholder
+            const tempEl = document.getElementById('weatherTemp');
+            if (tempEl.innerText === '--°') tempEl.innerHTML = '<i class="fas fa-spinner fa-spin text-4xl"></i>';
+
+            try {
+                // Fetch from Open-Meteo (CORS friendly, uses BOM/ACCESS data)
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${coords.lat}&longitude=${coords.lon}&current=temperature_2m,apparent_temperature,relative_humidity_2m,wind_speed_10m,wind_direction_10m&timezone=auto`;
+                const res = await fetch(url);
+                const data = await res.json();
+                
+                if(data.current) {
+                    tempEl.innerText = `${Math.round(data.current.temperature_2m)}°C`;
+                    document.getElementById('weatherFeels').innerText = `${Math.round(data.current.apparent_temperature)}°`;
+                    document.getElementById('weatherWind').innerText = `${Math.round(data.current.wind_speed_10m)} km/h`;
+                    document.getElementById('weatherHumid').innerText = `${data.current.relative_humidity_2m}%`;
+                    document.getElementById('weatherDir').innerText = `${getCardinalDirection(data.current.wind_direction_10m)}`;
+                }
+            } catch(e) {
+                console.error("Weather fetch failed", e);
+                tempEl.innerText = 'Error';
+            }
+        }
+
+        function getCardinalDirection(angle) {
+            const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+            return directions[Math.round(angle / 45) % 8];
+        }
+
+        // --- Rest of Radar Logic (Unchanged but included for completeness) ---
+
+        function initZoomControls() {
+            const container = els.radarContainer;
+            let isDragging = false;
+            let startX, startY;
+            let lastDist = 0;
+            let wasPinching = false;
+            let dragThresholdPassed = false; 
+
+            function updateTransform() {
+                els.zoomLayer.style.transform = `translate(${zoomState.x}px, ${zoomState.y}px) scale(${zoomState.scale})`;
+                if (zoomState.scale > 1 || zoomState.x !== 0 || zoomState.y !== 0) {
+                    els.resetZoomBtn.style.display = 'block';
+                } else {
+                    els.resetZoomBtn.style.display = 'none';
+                }
+            }
+
+            container.addEventListener('mousedown', e => {
+                e.preventDefault();
+                isDragging = true;
+                dragThresholdPassed = false;
+                startX = e.clientX - zoomState.x;
+                startY = e.clientY - zoomState.y;
+            });
+
+            window.addEventListener('mousemove', e => {
+                if (!isDragging) return;
+                e.preventDefault();
+                dragThresholdPassed = true;
+                zoomState.x = e.clientX - startX;
+                zoomState.y = e.clientY - startY;
+                updateTransform();
+            });
+
+            window.addEventListener('mouseup', () => { isDragging = false; });
+            
+            container.addEventListener('click', (e) => {
+                if (dragThresholdPassed) return; 
+                if (e.target.closest('button')) return; 
+                if (els.loading.style.display !== 'none') return;
+                togglePlay();
+                showClickFeedback();
+            });
+
+            container.addEventListener('wheel', e => {
+                e.preventDefault();
+                const scaleAmount = -e.deltaY * 0.001;
+                const newScale = Math.min(Math.max(MIN_ZOOM, zoomState.scale + scaleAmount), MAX_ZOOM);
+                zoomState.scale = newScale;
+                updateTransform();
+            });
+
+            container.addEventListener('touchstart', e => {
+                if (e.touches.length === 1) {
+                    isDragging = true;
+                    dragThresholdPassed = false;
+                    startX = e.touches[0].clientX - zoomState.x;
+                    startY = e.touches[0].clientY - zoomState.y;
+                } else if (e.touches.length === 2) {
+                    isDragging = false;
+                    wasPinching = true;
+                    lastDist = getDistance(e.touches);
+                }
+            }, { passive: false });
+
+            container.addEventListener('touchmove', e => {
+                e.preventDefault(); 
+                if (e.touches.length === 1 && !wasPinching) {
+                    const x = e.touches[0].clientX - startX;
+                    const y = e.touches[0].clientY - startY;
+                    if(Math.abs(x - zoomState.x) > 5 || Math.abs(y - zoomState.y) > 5) dragThresholdPassed = true;
+                    zoomState.x = x;
+                    zoomState.y = y;
+                    updateTransform();
+                } else if (e.touches.length === 2) {
+                    const dist = getDistance(e.touches);
+                    const delta = dist - lastDist;
+                    const scaleChange = delta * 0.005; 
+                    zoomState.scale = Math.min(Math.max(MIN_ZOOM, zoomState.scale + scaleChange), MAX_ZOOM);
+                    lastDist = dist;
+                    updateTransform();
+                }
+            }, { passive: false });
+
+            container.addEventListener('touchend', e => {
+                if (e.touches.length === 0) {
+                    if (wasPinching) wasPinching = false;
+                    else if (!dragThresholdPassed && isDragging) {
+                         if (els.loading.style.display === 'none') {
+                             togglePlay();
+                             showClickFeedback();
+                         }
+                    }
+                    isDragging = false;
+                }
+            });
+        }
+
+        function getDistance(touches) {
+            return Math.hypot(
+                touches[0].clientX - touches[1].clientX,
+                touches[0].clientY - touches[1].clientY
+            );
+        }
+
+        function resetZoom() {
+            zoomState = { scale: 1, x: 0, y: 0 };
+            els.zoomLayer.style.transform = `translate(0px, 0px) scale(1)`;
+            els.resetZoomBtn.style.display = 'none';
+        }
+
+        function updateLayerVisibility() {
+            if(els.toggles.loc.checked) els.layers.loc.classList.remove('layer-hidden');
+            else els.layers.loc.classList.add('layer-hidden');
+            if(els.toggles.topo.checked) els.layers.topo.classList.remove('layer-hidden');
+            else els.layers.topo.classList.add('layer-hidden');
+        }
+
+        function handleGeolocation() {
+            if (!navigator.geolocation) {
+                showError("Geolocation is not supported.");
+                return;
+            }
+            els.geoBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Locating...';
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const userLat = position.coords.latitude;
+                    const userLon = position.coords.longitude;
+                    
+                    userLocation = { lat: userLat, lon: userLon };
+                    // Save user location
+                    localStorage.setItem('userGPS', JSON.stringify(userLocation));
+
+                    let closestCity = null;
+                    let minDistance = Infinity;
+                    Object.keys(RADAR_DATA).forEach(city => {
+                        const rLat = RADAR_DATA[city].lat;
+                        const rLon = RADAR_DATA[city].lon;
+                        const dist = Math.sqrt(Math.pow(rLat - userLat, 2) + Math.pow(rLon - userLon, 2));
+                        if(dist < minDistance) {
+                            minDistance = dist;
+                            closestCity = city;
+                        }
+                    });
+                    if(closestCity) {
+                        els.locSelect.value = closestCity;
+                        localStorage.setItem('radarLocation', closestCity);
+                        if (activeTab === 'radar') {
+                            loadRadarSequence();
+                        } else {
+                            updateWeather();
+                        }
+                        els.geoBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Found';
+                        setTimeout(() => els.geoBtn.innerHTML = '<i class="fas fa-location-arrow mr-2"></i> Locate Me', 2000);
+                    }
+                },
+                () => {
+                    els.geoBtn.innerHTML = '<i class="fas fa-exclamation-triangle mr-2"></i> Error';
+                    showError("Unable to retrieve location.");
+                    setTimeout(() => els.geoBtn.innerHTML = '<i class="fas fa-location-arrow mr-2"></i> Locate Me', 2000);
+                }
+            );
+        }
+
+        function updateUserMarker() {
+            if (!userLocation) {
+                els.userMarker.style.display = 'none';
+                return;
+            }
+
+            const city = els.locSelect.value;
+            const rangeStr = els.rangeSelect.value;
+            const radarInfo = RADAR_DATA[city];
+            if (!radarInfo) return;
+
+            const rangeKm = parseInt(rangeStr);
+            const radarLat = radarInfo.lat;
+            const radarLon = radarInfo.lon;
+
+            const R = 6371; 
+            const dLat = (userLocation.lat - radarLat) * Math.PI / 180;
+            const dLon = (userLocation.lon - radarLon) * Math.PI / 180;
+            
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(radarLat * Math.PI / 180) * Math.cos(userLocation.lat * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            const distanceKm = R * c;
+
+            const y = Math.sin(dLon) * Math.cos(userLocation.lat * Math.PI / 180);
+            const x = Math.cos(radarLat * Math.PI / 180) * Math.sin(userLocation.lat * Math.PI / 180) -
+                      Math.sin(radarLat * Math.PI / 180) * Math.cos(userLocation.lat * Math.PI / 180) * Math.cos(dLon);
+            const bearing = Math.atan2(y, x);
+
+            if (distanceKm > rangeKm * 1.1) {
+                els.userMarker.style.display = 'none'; 
+                return;
+            }
+
+            const pixelsPerKm = 256 / rangeKm;
+            const pixelDist = distanceKm * pixelsPerKm;
+
+            const offsetX = pixelDist * Math.sin(bearing);
+            const offsetY = pixelDist * -Math.cos(bearing);
+
+            const finalX = 256 + offsetX;
+            const finalY = 256 + offsetY;
+
+            els.userMarker.style.left = `${finalX}px`;
+            els.userMarker.style.top = `${finalY}px`;
+            els.userMarker.style.display = 'block';
+        }
+
+        async function loadRadarSequence() {
+            stopAnimation();
+            const city = els.locSelect.value;
+            const range = els.rangeSelect.value;
+            
+            if (!RADAR_DATA[city]) { showError("Invalid location selected."); return; }
+            
+            const radarID = RADAR_DATA[city].ids[range] || RADAR_DATA[city].ids["128"]; 
+            if(!radarID) { showError("Radar configuration not found."); return; }
+
+            resetZoom();
+            els.loading.style.display = 'flex';
+            els.loadingText.textContent = "Connecting to BOM...";
+            els.loadingBar.style.width = "0%";
+            els.status.textContent = "";
+
+            els.layers.bg.src = `${STATIC_BASE_URL}${radarID}.background.png`;
+            els.layers.catchments.src = `${STATIC_BASE_URL}${radarID}.catchments.png`;
+            els.layers.topo.src = `${STATIC_BASE_URL}${radarID}.topography.png`;
+            els.layers.loc.src = `${STATIC_BASE_URL}${radarID}.locations.png`;
+
+            updateUserMarker();
+
+            els.rainContainer.innerHTML = '';
+            currentFrames = [];
+
+            // --- TWO-PHASE LOADING STRATEGY ---
+            els.loadingText.textContent = "Probing recent frames...";
+            const probeCandidates = generateCandidates(40, 2); 
+            const foundFrames = await loadBatch(probeCandidates, radarID, 0, probeCandidates.length);
+
+            if (foundFrames.length === 0) {
+                els.loading.style.display = 'none';
+                showError("Radar offline or no recent data.");
+                return;
+            }
+
+            addFramesToLoop(foundFrames);
+            startAnimation(); 
+
+            let interval = 6; 
+            if (foundFrames.length >= 2) {
+                foundFrames.sort((a,b) => b.rawTime - a.rawTime);
+                const diff = (foundFrames[0].rawTime - foundFrames[1].rawTime) / 60000;
+                if (Math.abs(diff - 10) < 1) interval = 10;
+                else if (Math.abs(diff - 6) < 1) interval = 6;
+            } else if (range === "512") {
+                interval = 10;
+            }
+
+            els.loadingText.textContent = `Loading history (${interval}m)...`;
+            const oldestLoaded = foundFrames.sort((a,b) => a.rawTime - b.rawTime)[0].rawTime;
+            const historyCandidates = generateBackfillCandidates(oldestLoaded, 120, interval); 
+            
+            const historyFrames = await loadBatch(historyCandidates, radarID, foundFrames.length, historyCandidates.length + foundFrames.length);
+            
+            if (historyFrames.length > 0) {
+                addFramesToLoop(historyFrames);
+                els.status.textContent = `Looping ${currentFrames.length} frames (${interval}m).`;
+            }
+            
+            els.loading.style.display = 'none';
+        }
+
+        async function loadBatch(candidates, radarID, progressStart, progressTotal) {
+            const results = [];
+            const BATCH_SIZE = 4;
+            
+            for (let i = 0; i < candidates.length; i += BATCH_SIZE) {
+                const batch = candidates.slice(i, i + BATCH_SIZE);
+                if (i > 0) await new Promise(r => setTimeout(r, 200));
+
+                const batchPromises = batch.map(timeObj => {
+                    return new Promise((resolve) => {
+                        const filename = `${radarID}.T.${timeObj.filenameString}.png`;
+                        const url = `${BASE_URL}${filename}`;
+                        const img = new Image();
+                        img.className = "radar-layer layer-rain";
+                        img.alt = `Rain Data ${timeObj.displayString}`;
+                        
+                        const timeoutId = setTimeout(() => { img.src = ""; resolve({ valid: false }); }, 20000); 
+
+                        img.onload = () => {
+                            clearTimeout(timeoutId);
+                            updateProgressBar(results.length + progressStart + 1, progressTotal);
+                            resolve({ valid: true, img: img, time: timeObj.displayString, rawTime: timeObj.date });
+                        };
+                        img.onerror = () => {
+                            clearTimeout(timeoutId);
+                            updateProgressBar(results.length + progressStart + 1, progressTotal);
+                            resolve({ valid: false });
+                        };
+                        img.src = url;
+                    });
+                });
+                const batchResults = await Promise.all(batchPromises);
+                results.push(...batchResults.filter(r => r.valid));
+            }
+            return results;
+        }
+
+        function addFramesToLoop(newFrames) {
+            const allFrames = [...currentFrames, ...newFrames];
+            const unique = [];
+            const seen = new Set();
+            for(const f of allFrames) {
+                if(!seen.has(f.time)) {
+                    seen.add(f.time);
+                    unique.push(f);
+                }
+            }
+            unique.sort((a,b) => a.rawTime - b.rawTime);
+            
+            els.rainContainer.innerHTML = '';
+            currentFrames = unique;
+            currentFrames.forEach(f => els.rainContainer.appendChild(f.img));
+            updateFrameDisplay();
+        }
+
+        function updateProgressBar(current, total) {
+            const pct = Math.round((current / total) * 100);
+            els.loadingBar.style.width = `${pct}%`;
+            els.loadingText.textContent = `Scanning... ${pct}%`;
+        }
+
+        function generateCandidates(minutesBack, stepMinutes) {
+            const steps = [];
+            const now = new Date();
+            let coeff = 1000 * 60 * stepMinutes;
+            let date = new Date(Math.floor(now.getTime() / coeff) * coeff);
+            date.setMinutes(date.getMinutes() - 6); 
+
+            for (let i = 0; i < (minutesBack / stepMinutes) + 1; i++) {
+                steps.push({
+                    date: new Date(date),
+                    filenameString: formatBOMDate(date),
+                    displayString: formatDisplayTime(date)
+                });
+                date.setMinutes(date.getMinutes() - stepMinutes);
+            }
+            return steps;
+        }
+
+        function generateBackfillCandidates(endTime, minutesBack, stepMinutes) {
+            const steps = [];
+            let date = new Date(endTime);
+            date.setMinutes(date.getMinutes() - stepMinutes); 
+
+            for (let i = 0; i < (minutesBack / stepMinutes); i++) {
+                steps.push({
+                    date: new Date(date),
+                    filenameString: formatBOMDate(date),
+                    displayString: formatDisplayTime(date)
+                });
+                date.setMinutes(date.getMinutes() - stepMinutes);
+            }
+            return steps;
+        }
+
+        function formatBOMDate(date) {
+            const y = date.getUTCFullYear();
+            const m = String(date.getUTCMonth() + 1).padStart(2, '0');
+            const d = String(date.getUTCDate()).padStart(2, '0');
+            const h = String(date.getUTCHours()).padStart(2, '0');
+            const min = String(date.getUTCMinutes()).padStart(2, '0');
+            return `${y}${m}${d}${h}${min}`;
+        }
+
+        function formatDisplayTime(date) {
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function startAnimation() {
+            if (animationInterval) clearInterval(animationInterval);
+            if (!isPlaying) return;
+            animationInterval = setInterval(() => {
+                currentFrameIndex++;
+                if (currentFrameIndex >= currentFrames.length) currentFrameIndex = 0; 
+                updateFrameDisplay();
+            }, animationSpeed);
+            updateFrameDisplay();
+        }
+
+        function stopAnimation() { if (animationInterval) clearInterval(animationInterval); }
+
+        function togglePlay() {
+            isPlaying = !isPlaying;
+            if (isPlaying) { els.playIcon.className = "fas fa-pause"; startAnimation(); } 
+            else { els.playIcon.className = "fas fa-play"; stopAnimation(); }
+        }
+
+        function showClickFeedback() {
+            const iconHtml = isPlaying ? '<i class="fas fa-play text-4xl ml-2"></i>' : '<i class="fas fa-pause text-4xl"></i>';
+            els.playOverlay.innerHTML = `<div class="bg-black/50 rounded-full p-6 text-white backdrop-blur">${iconHtml}</div>`;
+            els.playOverlay.classList.remove('opacity-0');
+            setTimeout(() => { els.playOverlay.classList.add('opacity-0'); }, 400);
+        }
+
+        function stepFrame(dir) {
+            stopAnimation();
+            isPlaying = false;
+            els.playIcon.className = "fas fa-play";
+            currentFrameIndex += dir;
+            if(currentFrameIndex < 0) currentFrameIndex = currentFrames.length - 1;
+            if(currentFrameIndex >= currentFrames.length) currentFrameIndex = 0;
+            updateFrameDisplay();
+        }
+
+        function updateFrameDisplay() {
+            if (!currentFrames[currentFrameIndex]) return;
+            for (let i = 0; i < currentFrames.length; i++) {
+                if (i === currentFrameIndex) currentFrames[i].img.classList.add('active');
+                else currentFrames[i].img.classList.remove('active');
+            }
+            els.timeDisplay.textContent = currentFrames[currentFrameIndex].time;
+            els.counterDisplay.textContent = `${currentFrameIndex + 1}/${currentFrames.length}`;
+        }
+
+        function showError(msg) {
+            els.loading.style.display = 'none';
+            els.status.textContent = msg;
+            els.status.classList.add('text-red-500');
+        }
+
+        init();
+    </script>
+</body>
+</html>
